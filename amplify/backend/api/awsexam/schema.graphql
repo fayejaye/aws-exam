@@ -1,0 +1,6 @@
+type Cards @model {
+  id: ID!
+  category: String!
+  question: String!
+  answer: String!
+}

@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "awsexam",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authawsexamf3546076",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
