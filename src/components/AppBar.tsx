@@ -6,6 +6,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 interface Props {
     appComp?: React.ReactNode;
+    signOut?: React.ReactNode;
     user: string
 }
 
@@ -41,7 +42,7 @@ export default function MenuAppBar(props: Props) {
             <AppBar position="static">
                 <Toolbar className={classes.toolbar}>
                     <Typography onClick={() => history.push('/')} variant="h6" className={classes.logo}>AWS Exam Prep</Typography>
-                    <div className={classes.title}>{props.user} <AccountCircleIcon style={{ paddingLeft: '5px' }} /></div>
+                    <div className={classes.title}>{props.user} <AccountCircleIcon style={{ paddingLeft: '5px' }} />{props.signOut}</div>
                 </Toolbar>
             </AppBar>
             <div className={classes.content}>
