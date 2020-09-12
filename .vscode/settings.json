@@ -1,0 +1,23 @@
+{
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "editor.trimAutoWhitespace": true,
+    "editor.rulers": [120],
+    "files.insertFinalNewline": true,
+    "editor.minimap.enabled": false,
+    "editor.formatOnSave": true,
+    "prettier.printWidth": 120,
+    "prettier.singleQuote": false,
+    "prettier.trailingComma": "all",
+    "prettier.bracketSpacing": true,
+    "prettier.tabWidth": 2,
+    "prettier.useTabs": false,
+    "editor.insertSpaces": true,
+    "files.trimTrailingWhitespace": true,
+    "prettier.jsxBracketSameLine": false,
+    "prettier.arrowParens": "avoid",
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+  }
+  

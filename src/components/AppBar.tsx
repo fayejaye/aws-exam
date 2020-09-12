@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function MenuAppBar(props: Props) {
+const MenuAppBar = (props: Props) => {
     const classes = useStyles();
     const history = useHistory();
 
@@ -45,9 +45,20 @@ export default function MenuAppBar(props: Props) {
                     <div className={classes.title}>{props.user} <AccountCircleIcon style={{ paddingLeft: '5px' }} />{props.signOut}</div>
                 </Toolbar>
             </AppBar>
+            {/* <AppBar color="primary" position="static">
+      <Toolbar style={{ paddingLeft: 0, position: 'relative' }}>
+        <Typography style={{ padding: 10, fontSize: '16px' }} color="inherit">fff</Typography>
+        <IconButton style={{ position: 'absolute', right: 0 }} color="inherit" aria-label="menu">
+          <MenuIcon />
+        </IconButton>
+        {title}
+      </Toolbar>
+    </AppBar> */}
             <div className={classes.content}>
                 {props.appComp}
             </div>
         </div>
     );
 }
+
+export default MenuAppBar
