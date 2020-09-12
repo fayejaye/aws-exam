@@ -13,6 +13,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import HomeIcon from "@material-ui/icons/Home";
 import { Link } from "react-router-dom";
 import { AmplifySignOut } from "@aws-amplify/ui-react";
+import MobileMenu from "./MobileMenu";
 
 const drawerWidth = 200;
 
@@ -47,6 +48,9 @@ const useStyles = makeStyles(theme => ({
     //Vertical Menu
     width: drawerWidth,
     whiteSpace: "nowrap", //Vertical Menu Item Text to be on 1 line
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   drawerOpen: {
     width: drawerWidth,
@@ -85,6 +89,21 @@ const useStyles = makeStyles(theme => ({
   listItemText: {
     textDecoration: "none",
     color: theme.palette.primary.main,
+  },
+  mobileMenu: {
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  desktopMenu: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+  signOut: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
 }));
 
@@ -133,21 +152,28 @@ const VerticalMenu = ({ appComp }: Props) => {
         })}
       >
         <Toolbar className={classes.toolbar} disableGutters={true}>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-            <Typography style={{ marginLeft: "10px" }} variant="h6" noWrap>
-              AWS Exam Preparation
-            </Typography>
-          </IconButton>
-          <AmplifySignOut />
+          <div className={classes.desktopMenu}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, {
+                [classes.hide]: open,
+              })}
+            >
+              <MenuIcon />
+              <Typography style={{ marginLeft: "10px" }} variant="h6" noWrap>
+                AWS Exam Preparation
+              </Typography>
+            </IconButton>
+          </div>
+          <div className={classes.mobileMenu}>
+            <MobileMenu menuItems={menuItems} />
+          </div>
+          <div className={classes.signOut}>
+            <AmplifySignOut />
+          </div>
         </Toolbar>
       </AppBar>
       <Drawer
