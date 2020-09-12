@@ -15,11 +15,7 @@ export const getCards = /* GraphQL */ `
   }
 `;
 export const listCardss = /* GraphQL */ `
-  query ListCardss(
-    $filter: ModelCardsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
+  query ListCardss($filter: ModelCardsFilterInput, $limit: Int, $nextToken: String) {
     listCardss(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
