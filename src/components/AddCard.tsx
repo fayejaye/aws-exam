@@ -2,7 +2,7 @@ import React from "react";
 import { TextField, makeStyles, createStyles, CircularProgress, Button } from "@material-ui/core";
 import { API, graphqlOperation } from "aws-amplify";
 import { createCards } from "../graphql/mutations";
-import { Severity } from "../constants";
+import { Severity, serviceList } from "../constants";
 import Alert from "./common/Alert";
 
 const useStyles = makeStyles(theme =>
@@ -32,14 +32,14 @@ interface Card {
 }
 
 const AddCard = () => {
-  const initialState = { category: "", question: "", answer: "" };
+  const initialState = { category: "API Gateway", question: "", answer: "" };
 
   const [input, setInput] = React.useState<Card>(initialState);
   const [errors, setErrors] = React.useState<Card>(initialState);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [alert, setAlert] = React.useState<{ type: Severity; title: string; content: string }>();
   const [alertVisibility, setAlertVisibility] = React.useState(false);
-
+  const [serviceDropDown, setServiceDropDown] = React.useState();
   const classes = useStyles();
 
   const handleInputChange = async (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -53,6 +53,19 @@ const AddCard = () => {
     });
   };
 
+  React.useEffect(() => {
+    let newArr: Array<{ value: string; label: string }> = [];
+    serviceList.map(service => {
+      return newArr.push({ value: service, label: service });
+    });
+    newArr.sort(function (a, b) {
+      var textA = a.value.toUpperCase();
+      var textB = b.value.toUpperCase();
+      return textA < textB ? -1 : textA > textB ? 1 : 0;
+    });
+    setServiceDropDown(newArr);
+  }, []);
+
   const save = async () => {
     setLoading(true);
     const add = { id: input.question, category: input.category, question: input.question, answer: input.answer };
@@ -60,6 +73,8 @@ const AddCard = () => {
       await API.graphql(graphqlOperation(createCards, { input: add }));
       setInput(initialState);
       setErrors(initialState);
+      setAlert({ type: "success", title: "Success", content: "Successfully added a new Card!" });
+      setAlertVisibility(true);
       setLoading(false);
     } catch (e) {
       setLoading(false);
@@ -71,19 +86,24 @@ const AddCard = () => {
   return (
     <div className={classes.form}>
       <TextField
-        id="outlined-basic"
-        autoComplete="off"
+        select
         name="category"
         style={{ width: "100%", height: "auto", paddingBottom: "10px" }}
+        label="AWS Service"
         value={input.category}
-        label="Category"
-        inputProps={{ maxLength: 255 }}
         onChange={handleInputChange}
-        required
-        error={Boolean(errors?.category)}
-        helperText={errors?.category}
+        SelectProps={{
+          native: true,
+        }}
         variant="outlined"
-      />
+      >
+        {serviceDropDown &&
+          serviceDropDown.map((service: any) => (
+            <option key={service.value} value={service.value}>
+              {service.label}
+            </option>
+          ))}
+      </TextField>
       <TextField
         id="outlined-basic"
         autoComplete="off"
@@ -130,7 +150,7 @@ const AddCard = () => {
         content={alert?.content!}
         open={alertVisibility}
         close={() => setAlertVisibility(false)}
-        timer={false}
+        timer={true}
       />
     </div>
   );

@@ -1,34 +1,34 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import { Card } from '@material-ui/core';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import { Card } from "@material-ui/core";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 345,
-    minWidth: 345
+    minWidth: 345,
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: "56.25%", // 16:9
   },
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
-  }
+    transform: "rotate(180deg)",
+  },
 }));
 
 type props = {
@@ -36,10 +36,10 @@ type props = {
   question: String;
   answer: String;
   activeIndex: Number;
-  length: Number
-}
+  length: Number;
+};
 
-const QuestionCard = ({service, question, answer, activeIndex, length}: props) => {
+const QuestionCard = ({ service, question, answer, activeIndex, length }: props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
@@ -48,9 +48,7 @@ const QuestionCard = ({service, question, answer, activeIndex, length}: props) =
 
   return (
     <Card className={classes.root}>
-      <CardHeader
-        title={service}
-      />
+      <CardHeader title={service} />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {question}
@@ -73,13 +71,10 @@ const QuestionCard = ({service, question, answer, activeIndex, length}: props) =
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography>
-            {answer}
-          </Typography>
+          <Typography>{answer}</Typography>
         </CardContent>
       </Collapse>
     </Card>
-    
   );
-}
-export default QuestionCard
+};
+export default QuestionCard;
