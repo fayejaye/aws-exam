@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "category": "Kinesis",
+      "question": "What drives the number of consumers you should have?",
+      "answer": "CPU Utilization"
+    },
+    {
+      "category": "Lambda",
+      "question": "Whats the default account limit for concurrent executions per second?",
+      "answer": "1,000"
+    },
+    {
+      "category": "X-Ray",
+      "question": "When setting up X-Ray in an ECS, does X-Ray Daemon need its own Docker image?",
+      "answer": "Yes"
+    }
+  ]
+}
