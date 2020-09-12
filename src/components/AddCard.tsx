@@ -62,8 +62,8 @@ const AddCard = () => {
       setErrors(initialState);
       setLoading(false);
     } catch (e) {
-      console.log("Error", e);
       setLoading(false);
+      setAlert({ type: "error", title: "Error", content: e });
       setAlertVisibility(true);
     }
   };
@@ -130,7 +130,7 @@ const AddCard = () => {
         content={alert?.content!}
         open={alertVisibility}
         close={() => setAlertVisibility(false)}
-        timer={true}
+        timer={false}
       />
     </div>
   );
